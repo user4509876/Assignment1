@@ -1,0 +1,29 @@
+#import libraries
+import matplotlib.pyplot as plt
+from itertools import product
+
+l1 = {}
+def numbrac1(initial):
+    l = 0
+    set1 = set()
+    while tuple(initial) not in set1:
+        set1.add(tuple(initial))
+        mod = (initial[0] + initial[1]) % 1
+        initial = (initial[1], mod)
+        l += 1
+    return l
+
+
+range1=range(10)
+# Go through all starting numbers
+for initial in product(range1, repeat=2):
+    brac = numbrac1(initial)
+
+    if brac in l1:
+        l1[brac] += 1
+    else:
+        l1[brac] = 1
+
+# Print lengths and number of each
+for a, b in l1.items():
+    print(f"{b} Number Bracelet(s) of Length: {a}")
