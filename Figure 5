@@ -1,1 +1,39 @@
+#import libraries
+import matplotlib.pyplot as plt
+from itertools import product
+l1 = {}
+values = [[] for _ in range(1, 51)]
+
+def numbrac3(initial, k):
+    set1 = set()
+    l = 0
+    while tuple(initial) not in set1:
+        set1.add(tuple(initial))
+        mod = (initial[0] + initial[1]) % k
+        initial = (initial[1], mod)
+        l =l+ 1
+    return l
+
+# go through all values of starting numbers
+for k in range(1, 51):
+    for initial in product(range(50), repeat=2):
+        brac_l = numbrac3(initial, k)
+
+        if brac_l in l1:
+            l1[brac_l] += 1
+        else:
+            l1[brac_l] = 1
+
+        values[k-1].append(brac_l)
+
+# Plot different number bracelet lengths against k
+k_values = list(range(1, 51))
+values1 = [len(set(l)) for l in values]
+
+plt.figure(figsize=(8, 5))
+plt.plot(k_values, values1, marker='o', color='r')
+plt.title("Number of Unique Length Number Bracelets vs k Values")
+plt.xlabel("Values of k")
+plt.ylabel("Number of Unique Length Number Bracelets")
+plt.show()
 
