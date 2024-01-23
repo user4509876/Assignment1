@@ -1,0 +1,18 @@
+#import libraries
+import matplotlib.pyplot as plt
+from itertools import product
+
+def numbrac6(initial):
+    set1 = set()
+    val = [] 
+    while tuple(initial) not in set1:
+        set1.add(tuple(initial))
+        val.append(initial[0])
+        mod = (initial[0] + initial[1]) % 10
+        initial = (initial[1], mod)
+    return val
+
+for initial in product(range(10), repeat=2):
+    x = numbrac6(initial)
+
+    print(f"First 2 Numbers: {initial}, Number Bracelet: {x}")
